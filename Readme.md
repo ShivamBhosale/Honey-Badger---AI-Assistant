@@ -237,5 +237,3 @@ By completing this project, you will:
 
 ---
 
-## Status
-🚧 **Planned / In Progress**
