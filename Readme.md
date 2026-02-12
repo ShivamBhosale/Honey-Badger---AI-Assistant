@@ -1,4 +1,4 @@
-# Reliable AI Assistant — Evaluation & Guardrails
+# Honey-Badger-AI-Assistant
 
 ## Overview
 Reliable AI Assistant is a **GenAI system focused on reliability, evaluation, and guardrails** rather than raw text generation.  
