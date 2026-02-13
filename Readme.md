@@ -1,7 +1,7 @@
 # Honey-Badger-AI-Assistant
 
 ## Overview
-Reliable AI Assistant is a **GenAI system focused on reliability, evaluation, and guardrails** rather than raw text generation.  
+Honey-Badger AI Assistant is a **GenAI system focused on reliability, evaluation, and guardrails** rather than raw text generation.  
 The project demonstrates how to **assess, score, and control AI outputs** before presenting them to users.
 
 Instead of blindly trusting model responses, this system introduces an **evaluation layer** that determines whether an AI-generated answer is safe, relevant, and confident enough to be shown.
