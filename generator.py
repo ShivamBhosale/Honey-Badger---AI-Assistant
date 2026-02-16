@@ -1,7 +1,7 @@
 import requests
 
 OLLAMA_URL = "http://localhost:11434/api/chat"
-MODEL = "llama3.2:3b"
+MODEL = "gemma3:latest"
 
 def generate_answer(question: str) -> str:
     prompt = f"""
