@@ -1,6 +1,7 @@
 import streamlit as st
 from generator import generate_answer
 from evaluator import evaluate_answer
+from guardrails import apply_guardrails
 
 st.set_page_config(page_title="Honey Badger AI Assistant")
 st.title("Honey Badger AI Assistant")
@@ -13,12 +14,19 @@ if st.button("Generate Answer"):
             try:
                 answer = generate_answer(question)
                 evaluation = evaluate_answer(question, answer)
+                decision = apply_guardrails(evaluation)
 
-                st.subheader("AI Answer")
-                st.write(answer)
+                st.subheader("Evaluation Score")
+                st.write(f"{evaluation['score']} / 100")
 
-                st.subheader("Evaluation")
-                st.write(f"Score: {evaluation['score']} / 100")
+                if decision["approved"]:
+                    st.subheader("Approved Answer")
+                    st.write(answer)
+                else:
+                    st.subheader("Answer Rejected")
+                    st.warning(decision["message"])
+
+                st.subheader("Evaluation Details")
                 for reason in evaluation["reasons"]:
                     st.write(f"- {reason}")
 
