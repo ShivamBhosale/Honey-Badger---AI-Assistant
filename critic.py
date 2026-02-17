@@ -37,7 +37,7 @@ Respond ONLY in this JSON format:
             "stream": False,
             "options": {"temperature": 0.2}
         },
-        timeout=120
+        timeout=600
     )
 
     response.raise_for_status()
