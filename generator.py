@@ -34,7 +34,7 @@ def generate_answer(question: str, image_file=None) -> str:
                 "temperature": 0.3
             }
         },
-        timeout=180
+        timeout=600
     )
 
     response.raise_for_status()
