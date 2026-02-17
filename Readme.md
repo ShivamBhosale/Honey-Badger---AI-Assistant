@@ -1,239 +1,149 @@
-# Honey-Badger-AI-Assistant
+# Honey Badger AI 🦡
 
 ## Overview
-Honey-Badger AI Assistant is a **GenAI system focused on reliability, evaluation, and guardrails** rather than raw text generation.  
-The project demonstrates how to **assess, score, and control AI outputs** before presenting them to users.
 
-Instead of blindly trusting model responses, this system introduces an **evaluation layer** that determines whether an AI-generated answer is safe, relevant, and confident enough to be shown.
+Honey Badger AI is a reliability-focused, debate-driven GenAI system built with Streamlit and Ollama.
 
-This mirrors how **real production GenAI systems** are designed.
+Unlike typical AI chat applications that blindly return model output, Honey Badger AI evaluates, critiques, refines, and validates responses before showing them to the user.
 
----
+It is designed around one principle:
 
-## Problem Statement
-Large Language Models can produce fluent answers, but:
-- They may hallucinate
-- They may ignore context
-- They may sound confident while being wrong
-
-Most GenAI demos stop at “generation.”  
-This project focuses on the **harder and more important problem**:  
-**How do we trust AI outputs?**
+> AI output must earn trust before being displayed.
 
 ---
 
-## Core Design Principle
-> **The AI is not the final authority.**  
-> Every generated answer must pass an evaluation step before being shown.
+## Core Philosophy
 
-If confidence is low or quality is insufficient, the system responds with:
-> *“I’m not confident enough to answer this.”*
+Honey Badger AI does not trust the first answer.
+
+Every response goes through:
+
+1. Initial generation  
+2. AI-based critique  
+3. Revision pass  
+4. Rule-based evaluation  
+5. Confidence scoring  
+6. Guardrail approval  
+
+Only high-confidence answers are shown.
 
 ---
 
 ## Architecture
-# Reliable AI Assistant — Evaluation & Guardrails
 
-## Overview
-Reliable AI Assistant is a **GenAI system focused on reliability, evaluation, and guardrails** rather than raw text generation.  
-The project demonstrates how to **assess, score, and control AI outputs** before presenting them to users.
-
-Instead of blindly trusting model responses, this system introduces an **evaluation layer** that determines whether an AI-generated answer is safe, relevant, and confident enough to be shown.
-
-This mirrors how **real production GenAI systems** are designed.
-
----
-
-## Problem Statement
-Large Language Models can produce fluent answers, but:
-- They may hallucinate
-- They may ignore context
-- They may sound confident while being wrong
-
-Most GenAI demos stop at “generation.”  
-This project focuses on the **harder and more important problem**:  
-**How do we trust AI outputs?**
-
----
-
-## Core Design Principle
-> **The AI is not the final authority.**  
-> Every generated answer must pass an evaluation step before being shown.
-
-If confidence is low or quality is insufficient, the system responds with:
-> *“I’m not confident enough to answer this.”*
-
----
-
-## Architecture
-User Input
+User Question 
 ↓
-Answer Generator (LLM)
+Generator (gemma3)
 ↓
-Evaluation Layer
+Text-Based Critic
+↓
+Revised Answer
+↓
+Rule Evaluation
+↓
+Score Fusion
 ↓
 Guardrails
 ↓
-✔ Accept Answer
-✖ Reject or Ask Again
+Final Output
 
 
 ---
 
-## Key Components
+## Models
 
-### 1. Answer Generator
-- Generates a response using a local LLM (Ollama)
-- Focuses on clarity, not correctness guarantees
+- **Generator**: `gemma3:latest`
+- **Critic**: Text-based evaluation (same model)
+- Fully local execution via **Ollama**
 
-### 2. Evaluator
-Evaluates the generated answer using:
-- Rule-based checks
-- Optional AI-based critique
-
-Metrics include:
-- Relevance to the question
-- Length and clarity
-- Hallucination indicators
-- Use of provided context (if any)
-
-### 3. Guardrails
-- Applies thresholds to evaluation scores
-- Blocks or reformulates low-confidence answers
-- Ensures safe and reliable user output
+No API keys required.
 
 ---
 
 ## Features
-- Local LLM execution (no API keys)
-- Automatic answer evaluation
-- Confidence scoring
-- Hallucination detection
-- Guardrail-based decision making
-- Modular and extensible design
+
+- Text + optional image input
+- Two-pass debate refinement
+- AI-based critique scoring
+- Rule-based evaluation checks
+- Combined confidence score
+- Guardrail-based rejection system
+- Modern styled Streamlit interface
+- Fully local inference
+
+---
+
+## Confidence System
+
+Final score is calculated as:
+
+
+If the final score meets the threshold → answer is approved.  
+If not → the system rejects the answer.
+
+This prevents low-quality or uncertain responses from being shown.
 
 ---
 
 ## Tech Stack
+
 - Python
 - Streamlit
-- Ollama (`llama3.2:3b`)
-- Rule-based evaluation logic
-- Optional LLM-based critique
+- Ollama
+- Requests
 
 ---
 
-## Repository Structure
+## Installation
 
----
+### 1. Install Ollama
+Download from: https://ollama.com
 
-## Key Components
+### 2. Pull the model
+```bash
+ollama pull gemma3:latest
 
-### 1. Answer Generator
-- Generates a response using a local LLM (Ollama)
-- Focuses on clarity, not correctness guarantees
+pip install -r requirements.txt
 
-### 2. Evaluator
-Evaluates the generated answer using:
-- Rule-based checks
-- Optional AI-based critique
+ollama serve
+streamlit run app.py
 
-Metrics include:
-- Relevance to the question
-- Length and clarity
-- Hallucination indicators
-- Use of provided context (if any)
+http://localhost:8501
 
-### 3. Guardrails
-- Applies thresholds to evaluation scores
-- Blocks or reformulates low-confidence answers
-- Ensures safe and reliable user output
+How It Works
 
----
+- User submits a question (optionally with an image)
+- Generator produces an initial answer
+- Critic evaluates clarity, relevance, and confidence
+- Generator revises the answer based on critique
+- Rule-based evaluation checks length, vagueness, and structure
+- Scores are combined
+- Guardrails decide whether to approve or reject
 
-## Features
-- Local LLM execution (no API keys)
-- Automatic answer evaluation
-- Confidence scoring
-- Hallucination detection
-- Guardrail-based decision making
-- Modular and extensible design
+Why Honey Badger AI?
 
----
+Most AI apps optimize for speed and fluency.
 
-## Tech Stack
-- Python
-- Streamlit
-- Ollama (`llama3.2:3b`)
-- Rule-based evaluation logic
-- Optional LLM-based critique
+Honey Badger AI optimizes for:
 
----
+- Reliability
+- Evaluation
+- Controlled output
+- Multi-stage reasoning
+- Guardrail enforcement
 
-## Repository Structure
-honeyBadger-AI-Assistant/
-├── app.py # Streamlit UI
-├── generator.py # Answer generation logic
-├── evaluator.py # Answer evaluation logic
-├── guardrails.py # Confidence thresholds and decisions
-├── requirements.txt
-└── README.md
+It demonstrates production-style GenAI system design rather than simple prompt engineering.
 
+Future Enhancements
 
----
+- Confidence calibration tuning
+- Auto-retry refinement loop
+- Lightweight critic model
+- Evaluation dashboard
+- Tool integration
+- Conversation memory
 
-## Example Workflow
+Status
 
-**User Question**
-What is the notice period mentioned in the document?
-
-
-**System Flow**
-1. LLM generates an answer
-2. Evaluator scores the response
-3. Guardrails check score thresholds
-
-**Possible Outcomes**
-- ✅ Answer shown with confidence
-- ❌ Response rejected due to low confidence
-- ❌ System says “Information not found”
-
----
-
-## Evaluation Criteria (Initial)
-- Answer length within acceptable range
-- No hallucination phrases (e.g. “generally”, “usually”, “it is believed”)
-- Direct relevance to the question
-- Clear, specific wording
-
-(Designed to be expanded later.)
-
----
-
-## Limitations
-- Single-turn interactions only
-- Evaluation logic is heuristic-based initially
-- No multi-agent debate
-- No external fact checking
-
----
-
-## Future Enhancements
-- Multi-LLM evaluation (critic model)
-- Scoring dashboards
-- Retry with prompt refinement
-- User-visible confidence indicators
-- Automatic prompt adjustment
-
----
-
-## Learning Outcomes
-By completing this project, you will:
-- Understand AI reliability challenges
-- Design evaluation pipelines for GenAI
-- Implement guardrails and confidence scoring
-- Build production-style GenAI systems
-- Move beyond prompt engineering into system design
-
----
+Working prototype with debate refinement, scoring, guardrails, and styled UI.
 
