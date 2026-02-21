@@ -1,4 +1,4 @@
-# Honey Badger AI 🦡
+# HoneyBadger AI 🦡
 
 ## Overview
 
