@@ -2,7 +2,7 @@
 
 ## Overview
 
-Honey Badger AI is a reliability-focused, debate-driven GenAI system built with Streamlit and Ollama.
+HoneyBadger AI is a reliability-focused, debate-driven GenAI system built with Streamlit and Ollama.
 
 Unlike typical AI chat applications that blindly return model output, Honey Badger AI evaluates, critiques, refines, and validates responses before showing them to the user.
 
