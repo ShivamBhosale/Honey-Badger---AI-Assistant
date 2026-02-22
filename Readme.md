@@ -31,21 +31,21 @@ Only high-confidence answers are shown.
 
 ## Architecture
 
-User Question 
+- User Question 
 ↓
-Generator (gemma3)
+- Generator (gemma3)
 ↓
-Text-Based Critic
+- Text-Based Critic
 ↓
-Revised Answer
+- Revised Answer
 ↓
-Rule Evaluation
+- Rule Evaluation
 ↓
-Score Fusion
+- Score Fusion
 ↓
-Guardrails
+- Guardrails
 ↓
-Final Output
+- Final Output
 
 
 ---
