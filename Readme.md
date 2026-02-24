@@ -51,7 +51,6 @@ Only high-confidence answers are shown.
 ---
 
 ## Models
-
 - **Generator**: `gemma3:latest`
 - **Critic**: Text-based evaluation (same model)
 - Fully local execution via **Ollama**
@@ -61,7 +60,6 @@ No API keys required.
 ---
 
 ## Features
-
 - Text + optional image input
 - Two-pass debate refinement
 - AI-based critique scoring
